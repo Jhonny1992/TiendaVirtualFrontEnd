@@ -1,0 +1,96 @@
+<mat-card>Ingrese los productos</mat-card>
+
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmProducto="ngForm" (ngSubmit)="operar()">
+
+  <div [hidden]="true">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="ID" required formControlName="idProducto">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Codigo" required formControlName="codigoProducto">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Nombre" required formControlName="nombreProducto">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Descripcion" required formControlName="descripcionProducto">
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Precio" required formControlName="precioProducto" type="number">
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Selecciona Linea" (change)="onSelect($event.target.value)">
+      <mat-option *ngFor="let l of linea" [value]="l.idLinea">
+          {{ l.descripLinea }}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+  <mat-select placeholder="Selecciona Categoria">
+      <mat-option  *ngFor="let c of categoria" [value]="c.idCategoria">
+          {{ c.descripCategoria }}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+
+  <!--<mat-form-field class="example-full-width">
+    <input matInput placeholder="foto" formControlName="fotoProducto">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>[Seleccione Linea]</mat-label>
+    <mat-select>
+      <mat-select-trigger>
+      </mat-select-trigger>
+      <mat-option></mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>[Seleccione Categoría]</mat-label>
+    <mat-select>
+      <mat-select-trigger>
+      </mat-select-trigger>
+      <mat-option></mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>[Seleccione Familia]</mat-label>
+    <mat-select>
+      <mat-select-trigger>
+      </mat-select-trigger>
+      <mat-option></mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>[Seleccione Clase]</mat-label>
+    <mat-select>
+      <mat-select-trigger>
+      </mat-select-trigger>
+      <mat-option></mat-option>
+    </mat-select>
+  </mat-form-field>-->
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="frmProducto.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Aceptar</span>
+  </button>
+  <button mat-raised-button color="accent" routerLink='/producto' type="button">
+    <mat-icon>close</mat-icon>
+    <span>Cancelar</span>
+  </button>
+
+</form>
