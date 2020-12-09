@@ -10,6 +10,11 @@ import { LineaService } from './../../../_service/linea.service';
 import { CategoriaService } from 'src/app/_service/categoria.service';
 import { Categoria } from 'src/app/_model/categoria';
 import { isNgTemplate } from '@angular/compiler';
+import { FamiliaService } from './../../../_service/familia.service';
+import { ClaseService } from 'src/app/_service/clase.service';
+import { Familia } from 'src/app/_model/familia';
+import { Clase } from 'src/app/_model/clase';
+
 
 @Component({
   selector: 'app-producto-agregar',
@@ -25,12 +30,16 @@ export class ProductoAgregarComponent implements OnInit {
 
 
   categoriaList: any;
+  familiaList: any;
+  claseList: any;
 
-  linea: Linea[];
-  categoria: Categoria[] = [];
+  linea: Linea[] = [];
+
 
 
   constructor(
+    private claseService: ClaseService,
+    private familiaService: FamiliaService,
     private categoriaService: CategoriaService,
     private lineaService: LineaService,
     private router: ActivatedRoute,
@@ -48,13 +57,36 @@ export class ProductoAgregarComponent implements OnInit {
       'codigoProducto': new FormControl(''),
       'nombreProducto': new FormControl(''),
       'descripcionProducto': new FormControl(''),
-      'precioProducto': new FormControl('')
+      'precioProducto': new FormControl(''),
+      'clase': new FormControl(''),
+      'familia': new FormControl(''),
+      'categoria': new FormControl(''),
+      'linea': new FormControl('')
     });
 
     this.router.params.subscribe((data: Params) => {
       this.idProducto = data['id'];
       this.edicion = data['id'] != null;
       this.initForm();
+    })
+  }
+
+ 
+  onSelect(e: any) {
+    this.categoriaService.listarPorId(e.value).subscribe(data =>{
+      this.categoriaList = data;
+    })
+  }
+
+  onSelectFam(e: any) {
+    this.familiaService.listarPorId(e.value).subscribe(data =>{
+      this.familiaList = data;
+    })
+  }
+
+  onSelectClas(e: any) {
+    this.claseService.listarPorId(e.value).subscribe(data =>{
+      this.claseList = data;
     })
   }
 
@@ -66,7 +98,11 @@ export class ProductoAgregarComponent implements OnInit {
           'codigoProducto': new FormControl(data.codigoProducto),
           'nombreProducto': new FormControl(data.nombreProducto),
           'descripcionProducto': new FormControl(data.descripcionProducto),
-          'precioProducto': new FormControl(data.precioProducto)
+          'precioProducto': new FormControl(data.precioProducto),
+          'clase': new FormControl(data.clase.descripClase),
+          'familia': new FormControl(data.familia.descripFamilia),
+          'categoria': new FormControl(data.categoria.descripCategoria),
+          'linea': new FormControl(data.linea.descripLinea)
         });
       });
     }
@@ -79,6 +115,10 @@ export class ProductoAgregarComponent implements OnInit {
     producto.nombreProducto = this.form.value['nombreProducto'];
     producto.descripcionProducto = this.form.value['descripcionProducto'];
     producto.precioProducto = this.form.value['precioProducto'];
+    producto.clase = this.form.value['clase'];
+    producto.familia = this.form.value['familia'];
+    producto.categoria = this.form.value['categoria'];
+    producto.linea = this.form.value['linea'];
 
     if (this.edicion) {
       //pipe concatena llamadas HTTP (subscribe)
@@ -98,13 +138,5 @@ export class ProductoAgregarComponent implements OnInit {
       })
     }
     this.route.navigate(['producto'])
-  }
-
-  onSelect(idLinea: number) {
-    this.categoriaService.listarPorId(idLinea).subscribe(() =>{
-    this.categoriaService.listar().subscribe(data =>{
-      this.categoriaService.categoriaCambio.next(data);
-    })
-    })
   }
 }

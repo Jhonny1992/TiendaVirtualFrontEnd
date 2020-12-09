@@ -17,21 +17,16 @@ import { Categoria } from 'src/app/_model/categoria';
 })
 export class ProductoComponent implements OnInit {
 
-  displayedColumns = ['idProducto','codigoProducto', 'nombreProducto', 'descripcionProducto', 'precioProducto', 'acciones'];
+  displayedColumns = ['idProducto','codigoProducto', 'nombreProducto', 'descripcionProducto', 'precioProducto', 'Clase','Familia','Categoria','Linea','acciones'];
   dataSource: MatTableDataSource<Producto>;
-
   //ViewChild busca la columna para ordenar de mayor a menor o viceversa. en este caso
   //coge el MatSort que son (flechas)
   @ViewChild(MatSort) sort:MatSort;
   @ViewChild(MatPaginator) paginator:MatPaginator;
 
-  productos: Producto[];
-
-  categoria: Categoria[];
 
   constructor(
     private snackbar: MatSnackBar,
-    private categoriaService: CategoriaService,
     private productoService: ProductoService) { }
 
   ngOnInit(): void {

@@ -27,7 +27,7 @@
 </mat-form-field>
 
 <mat-form-field>
-  <mat-select placeholder="Selecciona Linea" (change)="onSelect($event.target.value)">
+  <mat-select placeholder="Selecciona Linea" formControlName="linea" (selectionChange)="onSelect($event)">
       <mat-option *ngFor="let l of linea" [value]="l.idLinea">
           {{ l.descripLinea }}
       </mat-option>
@@ -35,54 +35,28 @@
 </mat-form-field>
 
 <mat-form-field>
-  <mat-select placeholder="Selecciona Categoria">
-      <mat-option  *ngFor="let c of categoria" [value]="c.idCategoria">
+  <mat-select placeholder="Selecciona Categoria" formControlName="categoria" (selectionChange)="onSelectFam($event)">
+      <mat-option  *ngFor="let c of categoriaList" [value]="c.idCategoria">
           {{ c.descripCategoria }}
       </mat-option>
   </mat-select>
 </mat-form-field>
 
+<mat-form-field>
+  <mat-select placeholder="Selecciona Familia" formControlName="familia" (selectionChange)="onSelectClas($event)">
+      <mat-option  *ngFor="let f of familiaList" [value]="f.idFamilia">
+          {{ f.descripFamilia }}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
 
-
-  <!--<mat-form-field class="example-full-width">
-    <input matInput placeholder="foto" formControlName="fotoProducto">
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>[Seleccione Linea]</mat-label>
-    <mat-select>
-      <mat-select-trigger>
-      </mat-select-trigger>
-      <mat-option></mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>[Seleccione Categoría]</mat-label>
-    <mat-select>
-      <mat-select-trigger>
-      </mat-select-trigger>
-      <mat-option></mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>[Seleccione Familia]</mat-label>
-    <mat-select>
-      <mat-select-trigger>
-      </mat-select-trigger>
-      <mat-option></mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>[Seleccione Clase]</mat-label>
-    <mat-select>
-      <mat-select-trigger>
-      </mat-select-trigger>
-      <mat-option></mat-option>
-    </mat-select>
-  </mat-form-field>-->
+<mat-form-field>
+  <mat-select placeholder="Selecciona Clase" formControlName="clase" >
+      <mat-option  *ngFor="let c of claseList" [value]="c.idClase">
+          {{ c.descripClase }}
+      </mat-option>
+  </mat-select>
+</mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="frmProducto.invalid">
     <mat-icon>done</mat-icon>
