@@ -21,7 +21,6 @@
     <input matInput placeholder="Descripcion" required formControlName="descripcionProducto">
   </mat-form-field>
 
-
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Precio" required formControlName="precioProducto" type="number">
 </mat-form-field>
@@ -36,7 +35,7 @@
 
 <mat-form-field>
   <mat-select placeholder="Selecciona Categoria" formControlName="categoria" (selectionChange)="onSelectFam($event)">
-      <mat-option  *ngFor="let c of categoriaList" [value]="c.idCategoria">
+      <mat-option  *ngFor="let c of categoria" [value]="c.idCategoria">
           {{ c.descripCategoria }}
       </mat-option>
   </mat-select>
@@ -44,7 +43,7 @@
 
 <mat-form-field>
   <mat-select placeholder="Selecciona Familia" formControlName="familia" (selectionChange)="onSelectClas($event)">
-      <mat-option  *ngFor="let f of familiaList" [value]="f.idFamilia">
+      <mat-option  *ngFor="let f of familia" [value]="f.idFamilia">
           {{ f.descripFamilia }}
       </mat-option>
   </mat-select>
@@ -52,7 +51,7 @@
 
 <mat-form-field>
   <mat-select placeholder="Selecciona Clase" formControlName="clase" >
-      <mat-option  *ngFor="let c of claseList" [value]="c.idClase">
+      <mat-option  *ngFor="let c of clase " [value]="c.idClase">
           {{ c.descripClase }}
       </mat-option>
   </mat-select>

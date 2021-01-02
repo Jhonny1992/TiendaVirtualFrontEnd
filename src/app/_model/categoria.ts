@@ -2,6 +2,6 @@ import { Linea } from './linea';
 
 export class Categoria{
     idCategoria: number;
-    descripCategoria: String;
+    descripCategoria: string;
     linea: Linea;
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductoService } from 'src/app/_service/producto.service';
 import { Producto } from 'src/app/_model/producto';
 import { switchMap } from 'rxjs/operators'
-import { pipe } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { Linea } from 'src/app/_model/linea';
 import { LineaService } from './../../../_service/linea.service';
 import { CategoriaService } from 'src/app/_service/categoria.service';
@@ -28,12 +28,10 @@ export class ProductoAgregarComponent implements OnInit {
   idProducto: number;
   edicion: boolean;
 
-
-  categoriaList: any;
-  familiaList: any;
-  claseList: any;
-
-  linea: Linea[] = [];
+  categoria: any ;
+  familia: any;
+  clase: any;
+  linea: any;;
 
 
 
@@ -48,9 +46,31 @@ export class ProductoAgregarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
     this.lineaService.listar().subscribe(data => {
       this.linea = data
     });
+
+    if(this.linea ==""){
+      console.log("error");
+
+}else{
+  this.categoriaService.listar().subscribe(data => {
+    this.categoria = data
+  });
+}
+
+  if(this.categoria>0){
+    this.familiaService.listar().subscribe(data => {
+      this.familia = data
+    });
+  }
+  if(this.familia > 0){
+    this.claseService.listar().subscribe(data => {
+      this.clase = data
+    });
+  }
 
     this.form = new FormGroup({
       'idProducto': new FormControl(0),
@@ -74,19 +94,19 @@ export class ProductoAgregarComponent implements OnInit {
  
   onSelect(e: any) {
     this.categoriaService.listarPorId(e.value).subscribe(data =>{
-      this.categoriaList = data;
+      this.categoria = data;
     })
   }
 
   onSelectFam(e: any) {
     this.familiaService.listarPorId(e.value).subscribe(data =>{
-      this.familiaList = data;
+      this.familia = data;
     })
   }
 
   onSelectClas(e: any) {
     this.claseService.listarPorId(e.value).subscribe(data =>{
-      this.claseList = data;
+      this.clase = data;
     })
   }
 
@@ -99,10 +119,12 @@ export class ProductoAgregarComponent implements OnInit {
           'nombreProducto': new FormControl(data.nombreProducto),
           'descripcionProducto': new FormControl(data.descripcionProducto),
           'precioProducto': new FormControl(data.precioProducto),
-          'clase': new FormControl(data.clase.descripClase),
-          'familia': new FormControl(data.familia.descripFamilia),
-          'categoria': new FormControl(data.categoria.descripCategoria),
-          'linea': new FormControl(data.linea.descripLinea)
+          'linea': new FormControl(data.linea.idLinea),
+          'categoria': new FormControl(data.categoria.idCategoria),
+          'familia': new FormControl(data.familia.idFamilia),
+          'clase': new FormControl(data.clase.idClase),
+          
+          
         });
       });
     }
@@ -115,10 +137,13 @@ export class ProductoAgregarComponent implements OnInit {
     producto.nombreProducto = this.form.value['nombreProducto'];
     producto.descripcionProducto = this.form.value['descripcionProducto'];
     producto.precioProducto = this.form.value['precioProducto'];
-    producto.clase = this.form.value['clase'];
-    producto.familia = this.form.value['familia'];
-    producto.categoria = this.form.value['categoria'];
     producto.linea = this.form.value['linea'];
+    producto.categoria = this.form.value['categoria'];
+    producto.familia = this.form.value['familia'];
+    producto.clase = this.form.value['clase'];
+    
+    
+    
 
     if (this.edicion) {
       //pipe concatena llamadas HTTP (subscribe)

@@ -35,32 +35,24 @@
     <mat-cell *matCellDef="let row"> {{row.precioProducto}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="Clase">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> CLASE </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.clase}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="Familia">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> FAMILIA </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row.familia}} </mat-cell>
+  <ng-container matColumnDef="Linea">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> LINEA </mat-header-cell>
+    <mat-cell *matCellDef="let row" > {{row.linea.descripLinea}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Categoria">
     <mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORIA </mat-header-cell>
-    <mat-cell *matCellDef="let row"> 
-      <ng-container *ngFor="let categoria  of row.categoria">
-        {{row.descripCategoria}} 
-      </ng-container>
-    </mat-cell>
+    <mat-cell *matCellDef="let row"> {{row.categoria.descripCategoria}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="Linea">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> LINEA </mat-header-cell>
-    <mat-cell *matCellDef="let row" >  
-        <ng-container *ngFor="let linea  of row.linea">
-          {{row.descripLinea}} 
-        </ng-container>
-      </mat-cell>
+  <ng-container matColumnDef="Familia">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> FAMILIA </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.familia.descripFamilia}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Clase">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> CLASE </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row.clase.descripClase}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="acciones">

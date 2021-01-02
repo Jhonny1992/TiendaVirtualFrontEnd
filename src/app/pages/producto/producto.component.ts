@@ -17,7 +17,7 @@ import { Categoria } from 'src/app/_model/categoria';
 })
 export class ProductoComponent implements OnInit {
 
-  displayedColumns = ['idProducto','codigoProducto', 'nombreProducto', 'descripcionProducto', 'precioProducto', 'Clase','Familia','Categoria','Linea','acciones'];
+  displayedColumns = ['idProducto','codigoProducto', 'nombreProducto', 'descripcionProducto', 'precioProducto', 'Linea','Categoria','Familia','Clase','acciones'];
   dataSource: MatTableDataSource<Producto>;
   //ViewChild busca la columna para ordenar de mayor a menor o viceversa. en este caso
   //coge el MatSort que son (flechas)
